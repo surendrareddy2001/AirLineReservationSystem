@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flight Details</title>
+	<style>
+		table {
+
+			border-collapse: collapse;
+			width: 100%;
+			margin-top: 20px;
+		}
+
+		th,
+		td {
+			border: 1px solid #ddd;
+			padding: 8px;
+			text-align: left;
+		}
+
+		th,
+		td {
+			background-color: #f2f2f2;
+		}
+
+		.no-flights-message {
+			color: #ff0000;
+			margin-top: 20px;
+		}
+
+		.book-button {
+			background-color: #4caf50;
+			color: #fff;
+			padding: 5px 10px;
+			cursor: pointer;
+			border: none;
+			border-radius: 4px;
+		}
+
+		body {
+			background-image: url("https://media.tenor.com/VDwwxlVfg-4AAAAC/andrew-goldstein-frnd.gif");
+			background-repeat: no-repeat;
+			background-size: 100% 800px;
+		}
+
+		.no-flights-message {
+			font-size: 28px;
+			color: rgb(159, 3, 3);
+		}
+	</style>
+</head>
+
+<body>
+	<h1 align="center">Flight Details</h1>
+
+	<!-- Check if the list of flights is empty -->
+	<div th:if="${#lists.isEmpty(flights)}" class="no-flights-message" align="center">
+		No Flights available in selected options. Please change the options.
+	</div>
+
+	<!-- Display the table only if the list is not empty -->
+	<table th:if="${not #lists.isEmpty(flights)}">
+		<!-- ... (your existing code) ... -->
+
+		<thead>
+			<tr>
+				<th>Flight Number</th>
+				<th>Boarding Point</th>
+				<th>Destination</th>
+				<th>Start Date</th>
+				<th>Start Time</th>
+				<th>End Date</th>
+				<th>End Time</th>
+				<th>Price</th>
+
+				<th>Actions</th> <!-- New column for the "Book" button -->
+			</tr>
+		</thead>
+		<!-- ... (your existing code) ... -->
+		<tbody>
+			<!-- Use Thymeleaf to iterate through the list of flights -->
+			<tr th:each="flight, rowStat : ${flights}">
+				<td th:text="${flight.flightNumber}"></td>
+				<td th:text="${flight.boardingPoint}"></td>
+				<td th:text="${flight.destination}"></td>
+				<td th:text="${flight.startDate}"></td>
+				<td th:text="${flight.startTime}"></td>
+				<td th:text="${flight.endDate}"></td>
+				<td th:text="${flight.endTime}"></td>
+				<td th:text="${flight.price}"></td>
+
+				<td>
+					<form th:action="@{/displayticket}">
+						<input type="hidden" name="flightNumber" th:value="${flight.flightNumber}" />
+						<input type="hidden" name="boardingPoint" th:value="${flight.boardingPoint}" />
+						<input type="hidden" name="destination" th:value="${flight.destination}" />
+						<input type="hidden" name="startDate" th:value="${flight.startDate}" />
+						<input type="hidden" name="startTime" th:value="${flight.startTime}" />
+						<input type="hidden" name="endDate" th:value="${flight.endDate}" />
+						<input type="hidden" name="endTime" th:value="${flight.endTime}" />
+						<input type="hidden" name="price" th:value="${flight.price}" />
+						<button type="submit" class="book-button">Book</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+
+	</table>
+
+</body>
+
+</html>

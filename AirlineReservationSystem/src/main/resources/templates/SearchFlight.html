@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Airline Booking</title>
+	<style>
+		body {
+			font-family: 'Arial', sans-serif;
+			background-image: url("https://media.tenor.com/VDwwxlVfg-4AAAAC/andrew-goldstein-frnd.gif");
+			background-repeat: no-repeat;
+			background-size: 100% 800px;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+
+		.header {
+			text-align: right;
+			padding: 40px;
+			position: absolute;
+			top: 7px;
+			right: 34px;
+			background-color: #333;
+			color: #fff;
+			  font-size: 20px;
+		}
+
+		.container {
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 10px 12px 2px rgba(0, 0, 0, 0.1);
+			width: 300px;
+			border: 2px solid grey;
+			text-align: center
+		}
+
+		h2 {
+			text-align: center;
+			color: #333;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 8px;
+			color: #555;
+		}
+
+		input {
+			width: calc(100% - 20px);
+			padding: 10px;
+			margin-bottom: 16px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		input[type="submit"] {
+			background-color: #4caf50;
+			color: #fff;
+			cursor: pointer;
+			width: 100%;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #45a049;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<span th:text="'Welcome, ' + ${username}" style="font-weight: bold;"></span>
+	</div>
+
+
+	<div class="container">
+		<form action="displayflights" method="GET">
+			<h2>Search Flights</h2>
+
+			<!-- Boarding Point input with suggestions -->
+			<label for="boardingPoint">Boarding Point:</label>
+			<div class="suggestions">
+				<input type="text" id="boardingPoint" name="boardingPoint" oninput="showSuggestions('boardingPoint')">
+				<ul id="boardingPointSuggestions"></ul>
+			</div>
+
+			<!-- Destination input with suggestions -->
+			<label for="destination">Destination:</label>
+			<div class="suggestions">
+				<input type="text" id="destination" name="destination" oninput="showSuggestions('destination')">
+				<ul id="destinationSuggestions"></ul>
+			</div>
+
+			<!-- Dates input with suggestions -->
+			<label for="dates">Dates:</label>
+			<div class="suggestions">
+				<input type="text" id="dates" name="dates" oninput="showSuggestions('dates')">
+				<ul id="datesSuggestions"></ul>
+			</div>
+
+			<input type="submit" value="Search">
+		</form>
+	</div>
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		// Replace hardcoded suggestion data with Thymeleaf variables
+		var boardingPointSuggestions = /*[[${boardingPoints}]]*/[];
+		var destinationSuggestions = /*[[${destination}]]*/[];
+		var datesSuggestions = /*[[${dates}]]*/[];
+
+		function showSuggestions(inputId) {
+			var inputElement = document.getElementById(inputId);
+			var suggestionsElement = document.getElementById(inputId + 'Suggestions');
+			var inputValue = inputElement.value.toLowerCase();
+			var suggestions = [];
+
+			// Determine which suggestions to show based on the inputId
+			switch (inputId) {
+				case 'boardingPoint':
+					suggestions = boardingPointSuggestions;
+					break;
+				case 'destination':
+					suggestions = destinationSuggestions;
+					break;
+				case 'dates':
+					suggestions = datesSuggestions;
+					break;
+				default:
+					break;
+			}
+
+			// Filter suggestions based on user input and limit to 5
+			var filteredSuggestions = suggestions
+				.filter(function (suggestion) {
+					return suggestion.toLowerCase().includes(inputValue);
+				})
+				.slice(0, 5); // Limit to 5 suggestions
+
+			// Display the filtered suggestions
+			suggestionsElement.innerHTML = '';
+			filteredSuggestions.forEach(function (suggestion) {
+				var li = document.createElement('li');
+				li.textContent = suggestion;
+				li.addEventListener('click', function () {
+					inputElement.value = suggestion;
+					suggestionsElement.innerHTML = '';
+				});
+				suggestionsElement.appendChild(li);
+			});
+		}
+        /*]]>*/
+	</script>
+</body>
+
+</html>

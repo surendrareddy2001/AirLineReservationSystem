@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Information Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+background-image: url("https://media.tenor.com/VDwwxlVfg-4AAAAC/andrew-goldstein-frnd.gif");            background-repeat: no-repeat;
+            background-size: 60% 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding-left: 80px;
+            border-radius: 8px;
+            box-shadow: 7px 6px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin-left: 850px;
+            border: 2px solid grey;
+        }
+
+        h2 {
+			margin-left: 40px;
+            color: #333;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px; /* Adjust the width as needed */
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input {
+            width: calc(100% - 80px); /* Adjust the width as needed */
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            display: inline-block;
+        }
+
+        input[type="submit"] {
+			width: calc(100% - 80px);
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        #boardingPoint,
+        #destination,#startDate,#endDate,#startTime,#endTime{
+           width: calc(50% - 40px);
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/saveflight"><br>
+        <h2>Flight Information Form</h2>
+
+        <label for="flightNumber">Flight Number:</label><br>
+        <input type="text" id="flightNumber" name="flightNumber" required>
+		<br>
+        <label for="boardingPoint">Boarding Point:</label>
+        &nbsp;&nbsp;&nbsp;
+        <label for="destination">Destination:</label><br>
+        <input type="text" id="boardingPoint" name="boardingPoint" required>
+
+   
+        <input type="text" id="destination" name="destination" required>
+
+        <label for="startDate">Start Date:</label>&nbsp;&nbsp;&nbsp;
+         <label for="endDate">End Date:</label><br>
+        <input type="date" id="startDate" name="startDate" required>
+       
+        <input type="date" id="endDate" name="endDate" required><br>
+
+        <label for="startTime">Start Time (24-hour format):</label>&nbsp;&nbsp;&nbsp;
+        <label for="endTime">End Time (24-hour format):</label><br>
+        <input type="time" id="startTime" name="startTime" required step="any">
+        <input type="time" id="endTime" name="endTime" required step="any">
+
+        <label for="price">Price:</label><br>
+        <input type="number" id="price" name="price" required>
+
+        <input type="submit" value="Submit"><br><br>
+    </form>
+
+</body>
+
+</html>

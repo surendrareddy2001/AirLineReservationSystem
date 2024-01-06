@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login and Sign Up Page</title>
+	<style>
+		body {
+			background-image: url("https://media.tenor.com/VDwwxlVfg-4AAAAC/andrew-goldstein-frnd.gif");
+			background-repeat: no-repeat;
+			background-size: 100% 800px;
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f4;
+		}
+
+		header {
+			background-color: #333;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+		}
+
+		section {
+			margin: 20px;
+			text-align: center;
+		}
+
+		form {
+			background-color: #fff;
+		
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			max-width: 400px;
+			margin: auto;
+			margin-bottom: 20px;
+			float: right;
+			margin-top: 200px;
+			align-content: center;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 8px;
+			font-weight: bold;
+		}
+
+		input {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 16px;
+			box-sizing: border-box;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+		}
+
+		button {
+			background-color: #333;
+			color: #fff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #555;
+		}
+
+
+
+		a {
+			text-decoration: none;
+		}
+
+		.registration-button {
+			background-color: #4CAF50;
+			color: #f4f4f4;
+			padding: 10px 20px;
+			border-radius: 4px;
+			border: none;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1>Airline reservation System</h1>
+	</header>
+
+	<section>
+		<!-- Login Form -->
+		<form action="/loginDetails">
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" required>
+
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="password" required>
+
+			<button type="submit">Login</button>
+			<a href="/registrationPage" class="registration-button">Sign Up</a>
+		</form>
+
+
+	</section>
+</body>
+
+</html>
